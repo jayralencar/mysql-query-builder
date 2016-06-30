@@ -66,6 +66,8 @@ function Builder(){
 	}
 }
 
+Builder.prototype = require('./src/where.js');
+
 /**
 * Database connection
 *
@@ -128,80 +130,6 @@ Builder.prototype.addSelect = function(field){
 }
 
 /**
-* Where
-* @param {String|Array} params
-* @return {Object} this
-*/
-Builder.prototype.where = function(param){
-	this.tableTest();
-	if(arguments.length > 1){
-		if(arguments.length > 2){
-			this._clausales.push({
-				type:1,
-				where: arguments[0] + " " + arguments[1] + " '" + arguments[2] + "'"
-			});
-		}else{
-			this._clausales.push({
-				type:1,
-				where: arguments[0] + " = '" + arguments[1] + "'"
-			});
-		}
-	}else{
-		for(var i = 0 ; i < param.length; i++){
-			if(param[i].length > 2){
-				this._clausales.push({
-					type:1,
-					where: param[i][0] + " " + param[i][1] + " '" + param[i][2] + "'"
-				});
-			}else{
-				this._clausales.push({
-					type:1,
-					where: param[i][0] + " = '" + param[i][1] + "'"
-				});
-			}
-		}
-	}
-	return this;
-}
-
-/**
-* Where Or
-* @param {String|Array} params
-* @return {Object} this
-*/
-Builder.prototype.whereOr = function(param){
-	this.tableTest();
-	if(arguments.length > 1){
-		if(arguments.length > 2){
-			this._clausales.push({
-				type:2,
-				where: arguments[0] + " " + arguments[1] + " '" + arguments[2] + "'"
-			});
-		}else{
-			this._clausales.push({
-				type:2,
-				where: arguments[0] + " = '" + arguments[1] + "'"
-			});
-		}
-	}else{
-		for(var i = 0 ; i < param.length; i++){
-			if(param[i].length > 2){
-				this._clausales.push({
-					type:2,
-					where: param[i][0] + " " + param[i][1] + " '" + param[i][2] + "'"
-				});
-			}else{
-				this._clausales.push({
-					type:2,
-					where: param[i][0] + " = '" + param[i][1] + "'"
-				});
-			}
-		}
-	}
-	return this;
-}
-
-/**
 * Get query result
 *
 * @ param {Function} callback
@@ -215,6 +143,7 @@ Builder.prototype.get = function(callback){
 	});
 	return this;
 }
+
 
 
 module.exports = new Builder();
