@@ -1,0 +1,28 @@
+{
+  "name": "mysql-query-builder",
+  "version": "0.0.2",
+  "description": "Query builder for mysql in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayralencar/mysql-query-builder.git"
+  },
+  "keywords": [
+    "mysql",
+    "query",
+    "builder",
+    "generator"
+  ],
+  "dependencies":{
+    "mysql" : "latest"
+  },
+  "author": "jayralencar (jayralencarpereira@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jayralencar/mysql-query-builder/issues"
+  },
+  "homepage": "https://github.com/jayralencar/mysql-query-builder#readme"
+}
