@@ -29,8 +29,6 @@ function Builder(){
 	this._sql = '';
 	this._table = null;
 	this._fields = [];
-	this._clausales = [];
-
 
 	this.connectionTest = function(){
 		if(!this.connection){
@@ -41,27 +39,6 @@ function Builder(){
 	this.tableTest = function(){
 		if(!this._table){
 			throw "Please, inform a table";
-		}
-	}
-
-	this.getWhere = function(){
-		if(this._clausales.length>0){
-			var str = " WHERE ";
-			for(var i in this._clausales){
-				var cl = this._clausales[i];
-				if(i == 0){
-					str += cl.where;
-				}else{
-					if(cl.type == 1){
-						str+=" AND "+cl.where;
-					}else{
-						str+=" OR "+cl.where;
-					}
-				}
-			}
-			return str;
-		}else{
-			return '';
 		}
 	}
 }
@@ -136,6 +113,9 @@ Builder.prototype.addSelect = function(field){
 * @return {Object} this
 */
 Builder.prototype.get = function(callback){
+	this.connectionTest();
+	this.tableTest();
+	this._fields = (this._fields.length>0)?this._fields:['*'];
 	this.sql = "SELECT "+this._fields.join(',')+" FROM "+this._table+this.getWhere();
 
 	this.connection.query(this.sql, function(err, rows, fields){

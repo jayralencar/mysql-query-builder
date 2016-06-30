@@ -8,10 +8,11 @@ builder.connect({
 });
 
 builder.table('pessoas')
-	.select('nome','email')
-	.where('id','>',1)
-	.whereOr('email','like','%jay%')
+	.whereNotIn('id',[1,2])
 	.get(function(err, rows, fields, sql){
 		console.log(sql)
+		if(err){
+			console.log(err)
+		}
 		console.log(rows)
 	});
