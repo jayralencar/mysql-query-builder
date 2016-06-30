@@ -43,6 +43,27 @@ function Builder(){
 			throw "Please, inform a table";
 		}
 	}
+
+	this.getWhere = function(){
+		if(this._clausales.length>0){
+			var str = " WHERE ";
+			for(var i in this._clausales){
+				var cl = this._clausales[i];
+				if(i == 0){
+					str += cl.where;
+				}else{
+					if(cl.type == 1){
+						str+=" AND "+cl.where;
+					}else{
+						str+=" OR "+cl.where;
+					}
+				}
+			}
+			return str;
+		}else{
+			return '';
+		}
+	}
 }
 
 /**
@@ -67,6 +88,7 @@ Builder.prototype.connect = function(config) {
 Builder.prototype.table = function(table){
 	this.connectionTest();
 	this._table = table;
+	this._clausales = [];
 	return this;
 }
 
@@ -106,16 +128,90 @@ Builder.prototype.addSelect = function(field){
 }
 
 /**
+* Where
+* @param {String|Array} params
+* @return {Object} this
+*/
+Builder.prototype.where = function(param){
+	this.tableTest();
+	if(arguments.length > 1){
+		if(arguments.length > 2){
+			this._clausales.push({
+				type:1,
+				where: arguments[0] + " " + arguments[1] + " '" + arguments[2] + "'"
+			});
+		}else{
+			this._clausales.push({
+				type:1,
+				where: arguments[0] + " = '" + arguments[1] + "'"
+			});
+		}
+	}else{
+		for(var i = 0 ; i < param.length; i++){
+			if(param[i].length > 2){
+				this._clausales.push({
+					type:1,
+					where: param[i][0] + " " + param[i][1] + " '" + param[i][2] + "'"
+				});
+			}else{
+				this._clausales.push({
+					type:1,
+					where: param[i][0] + " = '" + param[i][1] + "'"
+				});
+			}
+		}
+	}
+	return this;
+}
+
+/**
+* Where Or
+* @param {String|Array} params
+* @return {Object} this
+*/
+Builder.prototype.whereOr = function(param){
+	this.tableTest();
+	if(arguments.length > 1){
+		if(arguments.length > 2){
+			this._clausales.push({
+				type:2,
+				where: arguments[0] + " " + arguments[1] + " '" + arguments[2] + "'"
+			});
+		}else{
+			this._clausales.push({
+				type:2,
+				where: arguments[0] + " = '" + arguments[1] + "'"
+			});
+		}
+	}else{
+		for(var i = 0 ; i < param.length; i++){
+			if(param[i].length > 2){
+				this._clausales.push({
+					type:2,
+					where: param[i][0] + " " + param[i][1] + " '" + param[i][2] + "'"
+				});
+			}else{
+				this._clausales.push({
+					type:2,
+					where: param[i][0] + " = '" + param[i][1] + "'"
+				});
+			}
+		}
+	}
+	return this;
+}
+
+/**
 * Get query result
 *
 * @ param {Function} callback
 * @return {Object} this
 */
 Builder.prototype.get = function(callback){
-	this.sql = "SELECT "+this._fields.join(',')+" FROM "+this._table;
+	this.sql = "SELECT "+this._fields.join(',')+" FROM "+this._table+this.getWhere();
 
 	this.connection.query(this.sql, function(err, rows, fields){
-		callback(err, rows, fields);
+		callback(err, rows, fields, this.sql);
 	});
 	return this;
 }

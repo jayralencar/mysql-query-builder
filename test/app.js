@@ -9,6 +9,9 @@ builder.connect({
 
 builder.table('pessoas')
 	.select('nome','email')
-	.get(function(err, rows, fields){
+	.where('id','>',1)
+	.whereOr('email','like','%jay%')
+	.get(function(err, rows, fields, sql){
+		console.log(sql)
 		console.log(rows)
 	});
