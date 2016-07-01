@@ -8,7 +8,7 @@ builder.connect({
 });
 
 builder.table('pessoas')
-	.whereNotIn('id',[1,2])
+	.join('pessoa','pessoas.id','=','pessoa.id')
 	.get(function(err, rows, fields, sql){
 		console.log(sql)
 		if(err){

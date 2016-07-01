@@ -68,6 +68,7 @@ Builder.prototype.table = function(table){
 	this.connectionTest();
 	this._table = table;
 	this._clausales = [];
+	this._joins = []
 	return this;
 }
 
@@ -116,7 +117,7 @@ Builder.prototype.get = function(callback){
 	this.connectionTest();
 	this.tableTest();
 	this._fields = (this._fields.length>0)?this._fields:['*'];
-	this.sql = "SELECT "+this._fields.join(',')+" FROM "+this._table+this.getWhere();
+	this.sql = "SELECT "+this._fields.join(',')+" FROM "+this._table+this.getJoin()+" "+this.getWhere();
 
 	this.connection.query(this.sql, function(err, rows, fields){
 		callback(err, rows, fields, this.sql);

@@ -25,6 +25,10 @@ function Where(){
 	}
 }
 
+Where.prototype = require('./join.js');
+
+
+
 /**
 * Where
 * @param {String|Array} params
