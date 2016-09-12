@@ -125,6 +125,19 @@ Builder.prototype.get = function(callback){
 	return this;
 }
 
+/**
+* query
+* @param {String} sql, {Function} callback
+* @return {Object} this
+*/
+Builder.prototype.query = function(sql,options, callback){
+	if(!callback){
+		callback = options;
+		options = [];
+	}
 
+	this.connection.query(sql,options,callback);
+	return this;
+}
 
 module.exports = new Builder();
