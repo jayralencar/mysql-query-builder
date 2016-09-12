@@ -5,6 +5,9 @@ function Update(argument) {
 	
 }
 
+Update.prototype = require('./delete.js');
+
+
 /**
 * Update
 * @param {Object} data
