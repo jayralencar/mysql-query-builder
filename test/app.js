@@ -20,10 +20,7 @@ builder.connect({
 
 
 // insert
-builder.table('pessoas').insert({nome:'Jayr',email:'email@mail'}, function(err, res){
-	console.log(res.insertId)
-});
+// builder.table('pessoas').insert({nome:'Jayr',email:'email@mail'}, function(err, res){
+// 	console.log(res.insertId)
+// });
 
-builder.query('SELECT * FROM pessoas',[],function(err, rows, fields){
-	console.log(rows)
-});

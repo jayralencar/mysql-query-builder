@@ -5,6 +5,8 @@ function Insert(argument) {
 	
 }
 
+Insert.prototype = require('./update.js');
+
 /**
 * insert
 * @param {Object} data
