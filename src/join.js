@@ -15,6 +15,8 @@ function Join(argument) {
 	}	
 }
 
+Join.prototype = require('./insert.js');
+
 /**
 * join
 * @param {String} table , on1, operator, on2
