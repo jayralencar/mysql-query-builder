@@ -1,3 +1,6 @@
+/**
+Class Join
+*/
 function Join(argument) {
 	this._joins = [];
 	this.getJoin = function(){
@@ -12,6 +15,11 @@ function Join(argument) {
 	}	
 }
 
+/**
+* join
+* @param {String} table , on1, operator, on2
+* @return {Object} this
+*/
 Join.prototype.join = function(table, on1, operator, on2){
 	this._joins.push({
 		table: table,
@@ -19,6 +27,54 @@ Join.prototype.join = function(table, on1, operator, on2){
 		operator: operator,
 		on2: on2,
 		join: "JOIN"
+	});
+	return this;
+}
+
+/**
+* leftJoin
+* @param {String} table , on1, operator, on2
+* @return {Object} this
+*/
+Join.prototype.leftJoin = function(table, on1, operator, on2){
+	this._joins.push({
+		table: table,
+		on1: on1,
+		operator: operator,
+		on2: on2,
+		join: "LEFT JOIN"
+	});
+	return this;
+}
+
+/**
+* innerJoin
+* @param {String} table , on1, operator, on2
+* @return {Object} this
+*/
+Join.prototype.innerJoin = function(table, on1, operator, on2){
+	this._joins.push({
+		table: table,
+		on1: on1,
+		operator: operator,
+		on2: on2,
+		join: "INNER JOIN"
+	});
+	return this;
+}
+
+/**
+* rightJoin
+* @param {String} table , on1, operator, on2
+* @return {Object} this
+*/
+Join.prototype.rightJoin = function(table, on1, operator, on2){
+	this._joins.push({
+		table: table,
+		on1: on1,
+		operator: operator,
+		on2: on2,
+		join: "RIGHT JOIN"
 	});
 	return this;
 }

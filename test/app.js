@@ -8,7 +8,7 @@ builder.connect({
 });
 
 builder.table('pessoas')
-	.join('pessoa','pessoas.id','=','pessoa.id')
+	.leftJoin('pessoa','pessoas.id','=','pessoa.id')
 	.get(function(err, rows, fields, sql){
 		console.log(sql)
 		if(err){
