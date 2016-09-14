@@ -1,6 +1,6 @@
 {
-  "name": "mysql-query-builder",
-  "version": "0.0.13",
+  "name": "mysql-query-builder-js",
+  "version": "0.0.14",
   "description": "Query builder for mysql in Node.js",
   "main": "index.js",
   "scripts": {
