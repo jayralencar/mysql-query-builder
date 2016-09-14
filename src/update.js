@@ -20,7 +20,9 @@ Update.prototype.update = function(data, callback){
    		clause = {};
    	}
    	for(key in data){
-   		sets.push(key+" = '"+data[key]+"'");
+         if(data[key]){
+            sets.push(key+" = '"+data[key]+"'");
+         }
    	}
 
 	var sql = "UPDATE "+this._table+" SET "+sets.join(', ')+" "+this.getWhere();

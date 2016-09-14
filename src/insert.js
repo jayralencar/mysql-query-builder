@@ -16,8 +16,10 @@ Insert.prototype.insert = function(data, callback){
 	var keys = [];
    	var values = []
    	for(key in data){
-   		keys.push(key);
-   		values.push(data[key]);
+   		if(data[key]){
+   			keys.push(key);
+   			values.push(data[key]);
+   		}
    	}
 
    	var sql = "INSERT INTO "+this._table+" ("+keys.join(',')+") VALUES ('"+values.join("','")+"')";
