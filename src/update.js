@@ -20,7 +20,7 @@ Update.prototype.update = function(data, callback){
    		clause = {};
    	}
    	for(key in data){
-         if(data[key]){
+         if(data[key]!=null){
             sets.push(key+" = '"+data[key]+"'");
          }
    	}

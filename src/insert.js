@@ -16,7 +16,7 @@ Insert.prototype.insert = function(data, callback){
 	var keys = [];
    	var values = []
    	for(key in data){
-   		if(data[key]){
+   		if(data[key] != null){
    			keys.push(key);
    			values.push(data[key]);
    		}
